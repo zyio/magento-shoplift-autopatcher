@@ -19,11 +19,11 @@ fi
 
 #wget the patches from git to /tmp/magepatches
 mkdir /tmp/magepatches
-wget -O /tmp/magepatches/1.4.0-1.5.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.4.0-1.5.0.sh
-wget -O /tmp/magepatches/1.5.1.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.5.1.sh
-wget -O /tmp/magepatches/1.6.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.0.sh
-wget -O /tmp/magepatches/1.6.1-1.6.2.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.1-1.6.2.sh
-wget -O /tmp/magepatches/1.7.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.7.sh
+wget -qO /tmp/magepatches/1.4.0-1.5.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.4.0-1.5.0.sh
+wget -qO /tmp/magepatches/1.5.1.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.5.1.sh
+wget -qO /tmp/magepatches/1.6.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.0.sh
+wget -qO /tmp/magepatches/1.6.1-1.6.2.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.1-1.6.2.sh
+wget -qO /tmp/magepatches/1.7.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.7.sh
 
 #Find all the vulns!
 for SITE in $(find / -path '*/app/code/core/Mage/Core/Controller/Request/Http.php' -exec grep -L _internallyForwarded {} \;); do
