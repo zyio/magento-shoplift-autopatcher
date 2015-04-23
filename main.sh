@@ -1,3 +1,4 @@
+#!/bin/bash
 #magento autopatcher
 
 
@@ -17,7 +18,7 @@ then
 fi
 
 #wget the patches from git to /tmp/magepatches
-
+mkdir /tmp/magepatches
 wget -O /tmp/magepatches/1.4.0-1.5.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.4.0-1.5.0.sh
 wget -O /tmp/magepatches/1.5.1.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.5.1.sh
 wget -O /tmp/magepatches/1.6.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.0.sh
