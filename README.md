@@ -1,0 +1,1 @@
+# magento-shoplift-autopatcher
