@@ -9,7 +9,7 @@ APT=$(which apt-get)
 if [ -z "$YUM" ]
 then
   #no yum so presume apt
-  apt-get install patch
+  apt-get -f install patch
 elif [ -z "$APT" ]
 then
   #no apt so presume yum. Bit crude
