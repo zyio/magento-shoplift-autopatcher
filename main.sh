@@ -24,6 +24,7 @@ wget -qO /tmp/magepatches/1.5.1.sh  https://raw.githubusercontent.com/zyio/magen
 wget -qO /tmp/magepatches/1.6.0.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.0.sh
 wget -qO /tmp/magepatches/1.6.1-1.6.2.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.6.1-1.6.2.sh
 wget -qO /tmp/magepatches/1.7.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.7.sh
+wget -qO /tmp/magepatches/1.8-1.9.sh  https://raw.githubusercontent.com/zyio/magento-shoplift-autopatcher/master/patches/1.8-1.9.sh
 
 #Find all the vulns!
 for SITE in $(find / -path '*/app/code/core/Mage/Core/Controller/Request/Http.php' -exec grep -L _internallyForwarded {} \;); do
