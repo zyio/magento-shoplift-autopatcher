@@ -1,6 +1,13 @@
 #!/bin/bash
-#magento autopatcher
-
+#######################################################################################################
+##############
+##title:             Magento autopatcher
+##description:       Finds magento sites vulnerable to 'shoplift' and applies magento patch SUPEE-5344
+##author:            Sam Norbury - github.com/zyio - zy.io
+##date:              24/04/2015
+##version:           0.5
+##############
+#######################################################################################################
 
 #Install needed packages
 
@@ -35,6 +42,7 @@ for SITE in $(find / -path '*/app/code/core/Mage/Core/Controller/Request/Http.ph
   #Find Mage version of said site
   VERSION=$(php -r ";require '${DOCROOT}/app/Mage.php'; echo Mage::getVersion(); "|tr -d ".")
 
+  #Choose correct patch for correct version. Dot stripping tactic lovingly stolen from Mark @webcreation
   if [ ${VERSION} -le 1500 ]
   then
     PATCH=/tmp/magepatches/1.4.0-1.5.0.sh
@@ -57,16 +65,19 @@ for SITE in $(find / -path '*/app/code/core/Mage/Core/Controller/Request/Http.ph
   echo -e "Can't determine a correct patch to apply, possibly no patch available for your magento version of ${VERSION}\n"
   fi
 
-#some issue lies here. When run, ${PATCH} is blank and DOCROOT is the entire content of /app/code/core/Mage/Core/Controller/Request/Http.php
-
+  #copy patch into place
   cp ${PATCH} ${DOCROOT}
   
   PATCH=$(echo "${PATCH}" |awk -F'/magepatches/' {'print $2'})
 
+  #cd-ing the directory is a bit rough but not sure how well the mage scripts handle relative paths. Leaving for now
   cd ${DOCROOT}
+
+  #identify owner and run as that user to avoid silly permission issues
   OWNER=$(stat -c '%U' app/Mage.php)
   sudo -u${OWNER} /bin/bash ${PATCH}
-  
+ 
+  #tidy up after ourselves
   rm -f ${PATCH}
   echo -e "Magento installation in ${DOCROOT} patched\n"
 
@@ -78,3 +89,4 @@ echo -e "Now clear your caches out:\n \
       - https://www.byte.nl/wiki/How_to_apply_Magento_patch_SUPEE-5344?_ga=1.122262091.1191872873.1429777915\n \
       - Restart your webserver and/or php-fpm to be sure\n \
       - Consider apc/opcache as well"
+#Fin
