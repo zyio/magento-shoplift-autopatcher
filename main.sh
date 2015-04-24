@@ -29,11 +29,10 @@ wget -qO /tmp/magepatches/1.7.sh  https://raw.githubusercontent.com/zyio/magento
 for SITE in $(find / -path '*/app/code/core/Mage/Core/Controller/Request/Http.php' -exec grep -L _internallyForwarded {} \;); do
  
   #Determine document root with a questionable awk
-  #DOCROOT=$(awk -F'app/code/core' {'print $1'} $SITE)
   DOCROOT=$(echo "${SITE}"| awk -F'app/code/core' {'print $1'})
   
   #Find Mage version of said site
-  VERSION=$(php -r ";require '${DOCROOT}/app/Mage.php'; echo Mage::getVersion(); "|tr -d'.')
+  VERSION=$(php -r ";require '${DOCROOT}/app/Mage.php'; echo Mage::getVersion(); "|tr -d ".")
 
   if [ ${VERSION} -le 1500 ]
   then
@@ -66,7 +65,8 @@ for SITE in $(find / -path '*/app/code/core/Mage/Core/Controller/Request/Http.ph
   cd ${DOCROOT}
   OWNER=$(stat -c '%U' app/Mage.php)
   sudo -u${OWNER} /bin/bash ${PATCH}
-
+  
+  rm -f ${PATCH}
   echo -e "Magento installation in ${DOCROOT} patched\n"
 
 done
