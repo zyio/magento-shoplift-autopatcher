@@ -5,7 +5,7 @@ A bash script to find sites vulnerable to the magento bug dubbed `shoplift` and 
 
 Should run on any system that runs yum or apt, or feasibly any system that already has `patch` or `sed` already installed.
 
-Run `main.sh` like so:
+Run `main.sh` like so, as root:
 
   `bash main.sh`
 
